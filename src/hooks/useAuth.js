@@ -16,7 +16,7 @@ export default function useAuth() {
             import.meta.env.VITE_JS_KEY
         );
         Parse.serverURL = "https://parseapi.back4app.com/";
-    })
+    },[])
 
     const myLogin = async (data) => {
 

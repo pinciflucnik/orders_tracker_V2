@@ -2,7 +2,7 @@ import useGetOrders from "../../hooks/useGetOrders";
 import ListItem from "./list-item/ListItem";
 
 export default function OrderList(){
-    const orders = useGetOrders();
+    const { orders, deleteOrder, editOrder } = useGetOrders();
 return (
 <>
 <div>
@@ -19,7 +19,12 @@ return (
             </tr>
         </thead>
         <tbody>
-            {orders.map(order => <ListItem key={order.objectId} order={order} />)}
+            {orders.map(order => <ListItem 
+                    key={order.objectId} 
+                    order={order} 
+                    deleteOrder={deleteOrder}
+                    editOrder={editOrder}
+                />)}
         </tbody>
     </table>
 </div>

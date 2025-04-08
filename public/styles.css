@@ -32,3 +32,6 @@ html {
     line-height: 0.5em;
     border: 1px solid;
 }
+.gray {
+    color: gray;
+}
