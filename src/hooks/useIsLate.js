@@ -13,9 +13,6 @@ export default function useIsLate(order){
         const expected = new Date(order.expected.match(/\d+/g).reverse().map(Number));
         const timeLeft = Math.floor((expected - today) / divider);
 
-        console.log(expected);
-        console.log(today);
-
         if (timeLeft < 2 && timeLeft >= 0){
             setWarning(true)
         }
