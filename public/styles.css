@@ -38,3 +38,11 @@ html {
 .loading {
     background-color: gray;
 }
+.warning {
+    background-color: #F28123;
+    color: whitesmoke;
+}
+.late {
+    background-color: #D34E24;
+    color: white;
+}
