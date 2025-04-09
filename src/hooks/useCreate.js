@@ -32,13 +32,10 @@ export default function useCreate() {
             console.log('u r here');
             return;
         }
-        console.log(id);
-        console.log(formData);
 
         const data = {
             ...Object.fromEntries(formData)
         };
-        console.log(data);
         data.creator = user.username;
         data.orderDate = new Date().toLocaleDateString;
 

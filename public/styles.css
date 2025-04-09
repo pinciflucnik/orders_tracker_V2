@@ -35,3 +35,6 @@ html {
 .gray {
     color: gray;
 }
+.loading {
+    background-color: gray;
+}
