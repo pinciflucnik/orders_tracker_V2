@@ -2,6 +2,7 @@ import { useContext } from "react"
 import AuthContext from "../../../context/AuthContext"
 import useIsOwner from "../../../hooks/useIsOwner";
 import useGetOrders from "../../../hooks/useGetOrders";
+import { Link } from "react-router";
 
 export default function ListItem({
     order,
@@ -25,9 +26,9 @@ return (
                     <button onClick={()=> deleteOrder(order.objectId)} disabled={order.isOptimistic ? true : false}>
                         <i className="fa-solid fa-check"></i>
                     </button>
-                    <button disabled={order.isOptimistic ? true : false}>
+                    <Link to={`/${order.objectId}/edit`} disabled={order.isOptimistic ? true : false}>
                         <i className="fa-solid fa-pencil"></i>
-                    </button>
+                    </Link>
                 </td>
             }
         </tr>
