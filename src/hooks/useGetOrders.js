@@ -4,8 +4,10 @@ import Parse from 'parse/dist/parse.min.js';
 
 export default function useGetOrders() {
     const [orders, setOrders] = useState([]);
+    const [loadingOrders, setLoadingOrders] = useState(false)
 
     useEffect(()=> {
+        setLoadingOrders(false)
         Parse.initialize(
             import.meta.env.VITE_APP_ID,
             import.meta.env.VITE_JS_KEY
@@ -14,6 +16,7 @@ export default function useGetOrders() {
         const Order = Parse.Object.extend('Order')
         const query = new Parse.Query(Order);
         let orders = [];
+        setLoadingOrders(true)
         query.find()
             .then(data => {
                 
@@ -25,9 +28,11 @@ export default function useGetOrders() {
                 })
                 
                 setOrders(orders)
+                setLoadingOrders(false)
             })
             .catch(err => {
                 console.log(err);
+                setLoadingOrders(false)
                 
             })
             
@@ -80,6 +85,7 @@ export default function useGetOrders() {
 
     return {
         orders,
+        loadingOrders,
         deleteOrder,
         editOrder
     }

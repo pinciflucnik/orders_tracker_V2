@@ -11,14 +11,16 @@ function App() {
   return (
     <AuthProvider>
       <Headers />
-      <Routes>
-        {/* <Route path='/' element={<Register/>}/> */}
-        <Route path='/' element={<Login/>}/>
-        <Route path='/create' element={<HandleOrder />} />
-        <Route path='/:orderId/edit' element={<HandleOrder />} />
-        <Route path='/orders' element={<OrderList />}/>
-        <Route path='/logout' element={<Logout />}/>
-      </Routes>
+      <div className='container'>
+        <Routes>
+          {/* <Route path='/' element={<Register/>}/> */}
+          <Route path='/' element={<Login/>}/>
+          <Route path='/create' element={<HandleOrder />} />
+          <Route path='/:orderId/edit' element={<HandleOrder />} />
+          <Route path='/orders' element={<OrderList />}/>
+          <Route path='/logout' element={<Logout />}/>
+        </Routes>
+      </div>
     </AuthProvider>
   )
 }
