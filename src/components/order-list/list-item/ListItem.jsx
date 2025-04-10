@@ -22,7 +22,7 @@ return (
             <td>{order.expected}</td>
             <td>{order.creator}</td>
             {isOwner 
-                ?<td>
+                ?<td className="functions">
                     <button onClick={()=> deleteOrder(order.objectId)} disabled={order.isOptimistic ? true : false}>
                         <i className="fa-solid fa-check"></i>
                     </button>

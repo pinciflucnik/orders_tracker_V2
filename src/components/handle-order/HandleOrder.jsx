@@ -7,7 +7,7 @@ export default function HandleOrder(){
     const { handleOrder } = useCreate();
     const { order, pending } = useGetOne(orderId);
 return (
-    <div>
+    <div className="input-form">
         <form action={(data) => handleOrder(orderId, data)}>
             <label htmlFor="clientNumber">Client &#8470;</label>
             <input type="text" name="clientNumber" id="clientNumber" className={pending ? "loading" : ""} defaultValue={order.clientNumber}  required/>

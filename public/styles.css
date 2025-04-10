@@ -7,13 +7,30 @@
 }
 html {
     font: 16px/1.4 Oswald, sans-serif;
+    color: #563F1B;
+}
+body {
+    background-color: whitesmoke;
+}
+body, table, input, button {
+    font: inherit;
+}
+button, a {
+    display: flex;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+button:hover {
+    cursor: pointer;
 }
 /* Navigation */
 .navigation {
     max-width: 100;
     display: flex;
-    margin: 3em;
+    padding: 3em;
     justify-content: space-between;
+    background-color: #F7F052;
 }
 .navigation ul {
     display: flex;
@@ -26,11 +43,15 @@ html {
 }
 
 .navigation ul li a{
+    background-color: #563F1B;
     text-decoration: none;
-    padding: 1em;
-    color: inherit;
+    padding: 0.5em;
+    color: #F7F052;
     line-height: 0.5em;
-    border: 1px solid;
+    border-radius: 0.5em;
+}
+.navigation ul li a:hover, td button:hover, td a:hover{
+    box-shadow: 0 0 0.8em #2e220e;
 }
 .gray {
     color: gray;
@@ -46,3 +67,125 @@ html {
     background-color: #D34E24;
     color: white;
 }
+#root {
+    display: flex;
+    flex-direction: column;
+    background-color: #563F1B;
+    min-height: 100vh;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 80%;
+    margin: 3em auto;
+}
+.list {
+    overflow: hidden;
+    border-radius: 0.5em;
+}
+.list table {
+    border-spacing: 0em;
+    background-color: #F7F052;
+    font-size: 1.3em;
+}
+td, th {
+    vertical-align: middle;
+    padding: 0.5em;
+    text-align: center;
+}
+td button, td a {
+    background-color: transparent;
+    border: none;
+    overflow: hidden;
+    color: #F7F052;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 0.5em;
+}
+i {
+    background-color: #563F1B;
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0.3em;
+}
+.functions {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5em;
+
+}
+.input-form form {
+    display: flex;
+    flex-direction: column;
+    color: #F7F052;
+    font-size: 1.3em;
+}
+.input-form form input {
+    background-color: #F7F052;
+    color: #563F1B;
+    padding: 0.3em;
+    border-radius: 0.3em;
+}
+.input-form form label {
+    text-align: center;
+    margin: 0.5em;
+}
+.input-form form button {
+    margin-top: 2em;
+    justify-content: center;
+    background-color: #F7F052;
+    color: #563F1B;
+    padding: 0.3em;
+    border-radius: 0.3em;
+}
+.input-form form button:hover {
+    box-shadow: 0 0 0.8em #cac343;
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 90px;
+    height: 24px;
+    padding: 2px 0;
+    box-sizing: border-box;
+    display: flex;
+    animation: l5-0 3s infinite steps(6);
+    background:
+      linear-gradient(#563F1B 0 0) 0 0/0% 100% no-repeat,
+      radial-gradient(circle 3px,#eeee89 90%,#563F1B) 0 0/20% 100%
+      #563F1B;
+    overflow: hidden;
+  }
+  .loader::before {
+    content: "";
+    width: 20px;
+    transform: translate(-100%);
+    border-radius: 50%;
+    background: #ffff2d;
+    animation: 
+      l5-1 .25s .153s infinite steps(5) alternate,
+      l5-2  3s        infinite linear;
+  }
+  @keyframes l5-1{ 
+      0% {clip-path: polygon(50% 50%,100%   0,100% 0,0 0,0 100%,100% 100%,100% 100%)}
+    100% {clip-path: polygon(50% 50%,100% 65%,100% 0,0 0,0 100%,100% 100%,100%  35%)}
+  }
+  @keyframes l5-2{ 
+    100% {transform: translate(90px)}
+  }
+  @keyframes l5-0{ 
+    100% {background-size:120% 100%,20% 100%}
+  }
+  @media screen and (max-width:980px) {
+    html {
+        font-size: 10px;
+    }
+    
+  }
+  @media screen and (max-width:606px) {
+    html {
+        font-size: 8px;
+    }
+    
+  }
+
