@@ -1,6 +1,7 @@
 import {
     useContext,
-    useEffect
+    useEffect,
+    useState
 } from "react";
 
 import Parse from 'parse/dist/parse.min.js';
@@ -16,6 +17,7 @@ export default function useCreate() {
         isAuthenticated
     } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [handlePending, setHandlePending] = useState(false);
 
     useEffect(() => {
         Parse.initialize(
@@ -28,10 +30,11 @@ export default function useCreate() {
 
     const handleOrder = async (id, formData) => {
         if (!isAuthenticated) {
-            //TODO redirect to 403
+            //TODO set error
             console.log('u r here');
             return;
         }
+        setHandlePending(false)
 
         const data = {
             ...Object.fromEntries(formData)
@@ -41,7 +44,7 @@ export default function useCreate() {
 
         const Order = Parse.Object.extend("Order")
         let order
-
+        setHandlePending(true)
         try {
             if (!id) {
                 order = new Order();
@@ -60,17 +63,19 @@ export default function useCreate() {
             order.set("orderDate", data.orderDate)
             order.set("creator", data.creator)
             const savedOrder = await order.save();
-
+            setHandlePending(false)
             navigate('/orders');
 
             console.log(savedOrder);
         } catch (error) {
             console.log(error);
+            setHandlePending(false)
         }
 
     }
 
     return {
         handleOrder,
+        handlePending
     }
 }

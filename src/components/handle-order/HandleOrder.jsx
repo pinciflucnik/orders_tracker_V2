@@ -1,10 +1,11 @@
 import { useParams } from "react-router";
 import useCreate from "../../hooks/useCreate"
 import useGetOne from "../../hooks/useGetOne";
+import SmallLoader from "../loaders/SmallLoader";
 
 export default function HandleOrder(){
     const { orderId } = useParams();
-    const { handleOrder } = useCreate();
+    const { handleOrder, handlePending } = useCreate();
     const { order, pending } = useGetOne(orderId);
 return (
     <div className="input-form">
@@ -28,7 +29,12 @@ return (
             <input type="date"  name="expected" id="expected" className={pending ? "loading" : ""} defaultValue={order.expected} required/>
 
 
-            <button>{orderId ? "Edit" : "Create"}</button>
+            <button>
+                {handlePending
+                    ? <SmallLoader />
+                    : (orderId ? "Edit" : "Create")
+                    }
+                </button>
         </form>
     </div>
 )
