@@ -29,12 +29,15 @@ return (
             <input type="date"  name="expected" id="expected" className={pending ? "loading" : ""} defaultValue={order.expected} required/>
 
 
-            <button>
-                {handlePending
-                    ? <SmallLoader />
-                    : (orderId ? "Edit" : "Create")
-                    }
-                </button>
+            {handlePending 
+                ? <div className="loader-clock">
+                    <SmallLoader />
+                </div>
+                
+                :<button>
+                        {orderId ? "Edit" : "Create"}
+                 </button>
+            }
         </form>
     </div>
 )

@@ -12,6 +12,7 @@ export default function ListItem({
     const {user} = useContext(AuthContext);
     const isOwner = useIsOwner(order.creator, user.username);
     const { isLate, warning } = useIsLate(order);
+    const formattedDate = moment(order.expected).format("DD/MM/YYYY")
 
 return (
         <tr className={`${order.isOptimistic ? "gray" : ""} ${warning ? "warning" : ""} ${isLate ? "late" : ""}`}>
@@ -20,7 +21,7 @@ return (
             <td>{order.articleNumber}</td>
             <td>{order.quantity}</td>
             <td>{order.orderNumber}</td>
-            <td>{moment(order.expected).format("DD/MM/YYYY")}</td>
+            <td>{formattedDate}</td>
             <td>{order.creator}</td>
             {isOwner 
                 ?<td className="functions">

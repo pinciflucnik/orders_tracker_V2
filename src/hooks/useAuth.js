@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Parse from 'parse/dist/parse.min.js';
 // import * as request from '../lib/requester'
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 
 export default function useAuth() {
+    const [pending, setPending] = useState(false)
     const { userSetter } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -19,9 +20,17 @@ export default function useAuth() {
     },[])
 
     const myLogin = async (data) => {
-
+        setPending(false);
         try {
-            await Parse.User.logIn(data.get('username'), data.get('password'))
+            setPending(true)
+            const username = data.get('username');
+            const password = data.get('password')
+            if (!username || !password){
+                console.log('fill the fields moron');
+                setPending(false)
+                return;
+            }
+            await Parse.User.logIn(username, password)
             const loggedUser = JSON.parse(localStorage.getItem(`Parse/${import.meta.env.VITE_APP_ID}/currentUser`))
             const user = {
                 id: loggedUser.objectId,
@@ -29,11 +38,13 @@ export default function useAuth() {
                 username: loggedUser.username,
                 accessToken: loggedUser.sessionToken
             }
+            setPending(false)
             userSetter(user);
             navigate('/orders')
             console.log(user);
         } catch (error) {
-            console.log(error);
+            setPending(false)
+            console.log(error.message);
         }
     }
 
@@ -71,6 +82,7 @@ export default function useAuth() {
     return {
         myLogin,
         myLogout,
+        pending,
         // register,
     }
 }
