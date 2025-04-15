@@ -34,8 +34,8 @@ export default function useCreate() {
 
     const handleOrder = async (id, formData) => {
         if (!isAuthenticated) {
-            //TODO set error
-            console.log('u r here');
+            errorSetter('You have to be logged in to do that');
+            navigate('/');
             return;
         }
         setHandlePending(false)
@@ -54,6 +54,9 @@ export default function useCreate() {
                 errorSetter('Please fill all the fields');
                 return;
             }
+            
+        setHandlePending(true)
+        
         data.expected = moment(data.expected).format("YYYY-MM-DD")
         
         
@@ -62,7 +65,6 @@ export default function useCreate() {
 
         const Order = Parse.Object.extend("Order")
         let order
-        setHandlePending(true)
         try {
             if (!id) {
                 order = new Order();

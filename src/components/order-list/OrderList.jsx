@@ -32,11 +32,11 @@ return (
             </tbody>
         </table>
         : <table>
-            <th>
+            <thead>
                 <tr>
                     <td>There are no pending orders</td>
                 </tr>
-            </th>
+            </thead>
         </table>    
     )
     }

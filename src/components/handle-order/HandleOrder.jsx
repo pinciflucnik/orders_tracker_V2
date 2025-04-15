@@ -7,9 +7,16 @@ export default function HandleOrder(){
     const { orderId } = useParams();
     const { handleOrder, handlePending } = useCreate();
     const { order, pending } = useGetOne(orderId);
+
+    const submitHandler = (e) => { 
+        e.preventDefault()
+        const data = new FormData(e.target)
+        handleOrder(orderId, data)
+    }
+    
 return (
     <div className="input-form">
-        <form action={(data) => handleOrder(orderId, data)}>
+        <form onSubmit={submitHandler}>
             <label htmlFor="clientNumber">Client &#8470;</label>
             <input type="text" name="clientNumber" id="clientNumber" className={pending ? "loading" : ""} defaultValue={order.clientNumber}  required/>
             
@@ -34,7 +41,7 @@ return (
                     <SmallLoader />
                 </div>
                 
-                :<button>
+                :<button disabled={handlePending}>
                         {orderId ? "Edit" : "Create"}
                  </button>
             }
