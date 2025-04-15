@@ -3,6 +3,7 @@ import AuthContext from "../../../context/AuthContext"
 import useIsOwner from "../../../hooks/useIsOwner";
 import { Link } from "react-router";
 import useIsLate from "../../../hooks/useIsLate";
+import moment from "moment";
 
 export default function ListItem({
     order,
@@ -19,7 +20,7 @@ return (
             <td>{order.articleNumber}</td>
             <td>{order.quantity}</td>
             <td>{order.orderNumber}</td>
-            <td>{order.expected}</td>
+            <td>{moment(order.expected).format("DD/MM/YYYY")}</td>
             <td>{order.creator}</td>
             {isOwner 
                 ?<td className="functions">

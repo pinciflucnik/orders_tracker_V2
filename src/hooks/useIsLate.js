@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 
 export default function useIsLate(order){
@@ -9,9 +10,12 @@ export default function useIsLate(order){
     useEffect(() => {
         setIsLate(false);
         setWarning(false);
-        const today = new Date(new Date().setHours(0, 0, 0, 0));
-        const expected = new Date(order.expected.match(/\d+/g).reverse().map(Number));
-        const timeLeft = Math.floor((expected - today) / divider);
+        const today = moment()
+        const expected = moment(order.expected)
+        
+        const timeLeft = expected.diff(today, 'days');
+        
+    
 
         if (timeLeft < 2 && timeLeft >= 0){
             setWarning(true)

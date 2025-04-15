@@ -4,6 +4,8 @@ import {
     useState
 } from "react";
 
+import moment from "moment";
+
 import Parse from 'parse/dist/parse.min.js';
 
 import AuthContext from "../context/AuthContext";
@@ -39,8 +41,11 @@ export default function useCreate() {
         const data = {
             ...Object.fromEntries(formData)
         };
+        data.expected = moment(data.expected).format("YYYY-MM-DD")
+        
+        
         data.creator = user.username;
-        data.orderDate = new Date().toLocaleDateString;
+        data.orderDate = moment().format("YYYY-MM-DD")
 
         const Order = Parse.Object.extend("Order")
         let order
@@ -48,6 +53,7 @@ export default function useCreate() {
         try {
             if (!id) {
                 order = new Order();
+                order.set("creator", data.creator)
             } else {
                 const query = new Parse.Query(Order);
                 order = await query.get(id);
@@ -61,7 +67,6 @@ export default function useCreate() {
             order.set("orderNumber", data.orderNumber)
             order.set("expected", data.expected)
             order.set("orderDate", data.orderDate)
-            order.set("creator", data.creator)
             const savedOrder = await order.save();
             setHandlePending(false)
             navigate('/orders');
