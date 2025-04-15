@@ -9,7 +9,8 @@ return (
 <div className="list">
     { loadingOrders
         ? <MainLoader />
-        : <table>
+        : (orders.length > 0 
+            ?<table>
             <thead>
                 <tr>
                     <th>Client &#8470;</th>
@@ -30,6 +31,14 @@ return (
                     />)}
             </tbody>
         </table>
+        : <table>
+            <th>
+                <tr>
+                    <td>There are no pending orders</td>
+                </tr>
+            </th>
+        </table>    
+    )
     }
 </div>
 </>
