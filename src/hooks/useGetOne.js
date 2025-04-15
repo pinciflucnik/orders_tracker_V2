@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Parse from 'parse/dist/parse.min.js';
+import ErrorContext from "../context/ErrorContext";
 
 export default function useGetOne(id) {
     const [order, setOrder] = useState({})
     const [pending, setPending] = useState(false)
+    const { errorSetter } = useContext(ErrorContext)
 
     useEffect(() => {
         Parse.initialize(
@@ -26,7 +28,7 @@ export default function useGetOne(id) {
                 setPending(false)
             })
             .catch(err => {
-                console.log(err)
+                errorSetter(err)
                 setPending(false)
             })
 

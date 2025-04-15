@@ -12,12 +12,14 @@ import AuthContext from "../context/AuthContext";
 import {
     useNavigate
 } from "react-router";
+import ErrorContext from "../context/ErrorContext";
 
 export default function useCreate() {
     const {
         user,
         isAuthenticated
     } = useContext(AuthContext);
+    const { errorSetter } = useContext(ErrorContext)
     const navigate = useNavigate();
     const [handlePending, setHandlePending] = useState(false);
 
@@ -41,6 +43,17 @@ export default function useCreate() {
         const data = {
             ...Object.fromEntries(formData)
         };
+        if (
+            !data.clientNumber ||
+            !data.clientName ||
+            !data.articleNumber ||
+            !data.quantity ||
+            !data.orderNumber ||
+            !data.expected 
+            ) {
+                errorSetter('Please fill all the fields');
+                return;
+            }
         data.expected = moment(data.expected).format("YYYY-MM-DD")
         
         
@@ -73,8 +86,8 @@ export default function useCreate() {
 
             console.log(savedOrder);
         } catch (error) {
-            console.log(error);
-            setHandlePending(false)
+            errorSetter(error);
+            setHandlePending(false);
         }
 
     }

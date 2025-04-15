@@ -4,11 +4,13 @@ import Parse from 'parse/dist/parse.min.js';
 // import * as request from '../lib/requester'
 import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router";
+import ErrorContext from "../context/ErrorContext";
 
 
 export default function useAuth() {
     const [pending, setPending] = useState(false)
     const { userSetter } = useContext(AuthContext);
+    const { errorSetter } = useContext(ErrorContext)
     const navigate = useNavigate();
 
     useEffect(()=> {
@@ -26,7 +28,7 @@ export default function useAuth() {
             const username = data.get('username');
             const password = data.get('password')
             if (!username || !password){
-                console.log('fill the fields moron');
+                errorSetter('Please fill all the fields')
                 setPending(false)
                 return;
             }
@@ -43,8 +45,8 @@ export default function useAuth() {
             navigate('/orders')
             console.log(user);
         } catch (error) {
+            errorSetter(error)
             setPending(false)
-            console.log(error.message);
         }
     }
 

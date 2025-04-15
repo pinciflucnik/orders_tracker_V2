@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Parse from 'parse/dist/parse.min.js';
+import ErrorContext from "../context/ErrorContext";
+import { useNavigate } from "react-router";
 
 export default function useGetOrders() {
     const [orders, setOrders] = useState([]);
-    const [loadingOrders, setLoadingOrders] = useState(false)
+    const [loadingOrders, setLoadingOrders] = useState(false);
+    const { errorSetter } = useContext(ErrorContext);
+    const navigate = useNavigate()
 
     useEffect(()=> {
         setLoadingOrders(false)
@@ -31,7 +35,7 @@ export default function useGetOrders() {
                 setLoadingOrders(false)
             })
             .catch(err => {
-                console.log(err);
+                errorSetter(err)
                 setLoadingOrders(false)
                 
             })
@@ -69,7 +73,9 @@ export default function useGetOrders() {
             setOrders(updatedList);
             
         } catch (error) {
-            console.log(error);
+            errorSetter(error);
+            navigate("/orders")
+            
             
         }
     }

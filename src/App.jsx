@@ -6,22 +6,27 @@ import Logout from './components/logout/Logout'
 import OrderList from './components/order-list/OrderList'
 // import Register from './components/register/Register'
 import { AuthProvider } from './context/AuthContext'
+import { ErrorProvider } from './context/ErrorContext'
+import Error from './components/error/Error'
 
 function App() {
   return (
-    <AuthProvider>
-      <Headers />
-      <div className='container'>
-        <Routes>
-          {/* <Route path='/' element={<Register/>}/> */}
-          <Route path='/' element={<Login/>}/>
-          <Route path='/create' element={<HandleOrder />} />
-          <Route path='/:orderId/edit' element={<HandleOrder />} />
-          <Route path='/orders' element={<OrderList />}/>
-          <Route path='/logout' element={<Logout />}/>
-        </Routes>
-      </div>
-    </AuthProvider>
+    <ErrorProvider>
+      <AuthProvider>
+        <Headers />
+        <div className='container'>
+          <Error />
+          <Routes>
+            {/* <Route path='/' element={<Register/>}/> */}
+            <Route path='/' element={<Login />} />
+            <Route path='/create' element={<HandleOrder />} />
+            <Route path='/:orderId/edit' element={<HandleOrder />} />
+            <Route path='/orders' element={<OrderList />} />
+            <Route path='/logout' element={<Logout />} />
+          </Routes>
+        </div>
+      </AuthProvider>
+    </ErrorProvider>
   )
 }
 
