@@ -7,10 +7,15 @@ import SmallLoader from "../loaders/SmallLoader";
 export default function Login(){
     const { myLogin, pending } = useAuth()
     const { isAuthenticated } = useContext(AuthContext);
+    const submitHandler = (e)=> {
+        e.preventDefault()
+        const data = new FormData(e.target)
+        myLogin(data)
+    }
 return (
         <div className="input-form">
             {!isAuthenticated ?
-            <form action={myLogin}>
+            <form onSubmit={submitHandler}>
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username" autoComplete=""/>
                 <label htmlFor="password">Password</label>
