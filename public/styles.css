@@ -95,7 +95,7 @@ td a:hover {
     display: flex;
     flex-direction: column;
     /* background-color: #563F1B; */
-    background-image: url("/public/pinci_small.jpg");
+    background-image: url("https://res-console.cloudinary.com/dtwyysfkn/thumbnails/v1/image/upload/v1744748885/cGluY2lfc21hbGxfZHZsY215/drilldown");
     background-repeat: repeat;
     min-height: 100vh;
 }
