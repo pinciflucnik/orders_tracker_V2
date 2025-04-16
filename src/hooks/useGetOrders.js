@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
-import Parse from 'parse/dist/parse.min.js';
+import Parse from '../lib/parse';
 import ErrorContext from "../context/ErrorContext";
 import { useNavigate } from "react-router";
 
@@ -12,11 +12,6 @@ export default function useGetOrders() {
 
     useEffect(()=> {
         setLoadingOrders(false)
-        Parse.initialize(
-            import.meta.env.VITE_APP_ID,
-            import.meta.env.VITE_JS_KEY
-        );
-        Parse.serverURL = "https://parseapi.back4app.com/";
         const Order = Parse.Object.extend('Order')
         const query = new Parse.Query(Order);
         let orders = [];

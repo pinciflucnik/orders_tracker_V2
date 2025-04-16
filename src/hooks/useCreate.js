@@ -6,7 +6,7 @@ import {
 
 import moment from "moment";
 
-import Parse from 'parse/dist/parse.min.js';
+import Parse from '../lib/parse';
 
 import AuthContext from "../context/AuthContext";
 import {
