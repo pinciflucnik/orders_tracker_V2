@@ -10,12 +10,19 @@ export default function useIsLate(order){
     useEffect(() => {
         setIsLate(false);
         setWarning(false);
-        const today = moment()
-        const expected = moment(order.expected, "DD/MM/YYYY г.")
+        const now = new Date()
+        const today = moment(now);
+        const formatHelper = order.expected.match(/[0-9]{2}.[0-9]{2}.[0-9]{4}/)[0]
+        const expected = moment(formatHelper, "DD/MM/YYYY");
+
+        console.log(today);
+        console.log(expected);
+        console.log(formatHelper);
         
         const timeLeft = expected.diff(today, 'days');
         
-    
+        console.log('---------- timeLeft ----------');
+        console.log(timeLeft);
 
         if (timeLeft < 2 && timeLeft >= 0){
             setWarning(true)

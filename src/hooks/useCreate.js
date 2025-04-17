@@ -1,6 +1,5 @@
 import {
     useContext,
-    useEffect,
     useState
 } from "react";
 
@@ -22,14 +21,6 @@ export default function useCreate() {
     const { errorSetter } = useContext(ErrorContext)
     const navigate = useNavigate();
     const [handlePending, setHandlePending] = useState(false);
-
-    useEffect(() => {
-        Parse.initialize(
-            import.meta.env.VITE_APP_ID,
-            import.meta.env.VITE_JS_KEY
-        );
-        Parse.serverURL = "https://parseapi.back4app.com/";
-    })
 
 
     const handleOrder = async (id, formData) => {
@@ -56,12 +47,10 @@ export default function useCreate() {
             }
             
         setHandlePending(true)
-        
-        data.expected = moment(data.expected).format("YYYY-MM-DD")
-        
-        
+        data.expected = new Date(data.expected);
+               
         data.creator = user.username;
-        data.orderDate = moment().format("YYYY-MM-DD")
+        data.orderDate = new Date();
 
         const Order = Parse.Object.extend("Order")
         let order
