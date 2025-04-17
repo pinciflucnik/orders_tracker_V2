@@ -1,5 +1,2 @@
-// add loader on 
-        loading orders
-        logout
-        login ??
-        create ?? - onCreate make button -> loader        
+A simple working project to keep track of order's delivery times.
+It is used by 4 people on working bases   
