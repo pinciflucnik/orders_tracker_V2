@@ -11,7 +11,7 @@ export default function useIsLate(order){
         setIsLate(false);
         setWarning(false);
         const today = moment()
-        const expected = moment(order.expected)
+        const expected = moment(order.expected, "DD/MM/YYYY г.")
         
         const timeLeft = expected.diff(today, 'days');
         

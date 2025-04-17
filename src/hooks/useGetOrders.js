@@ -3,11 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import Parse from '../lib/parse';
 import ErrorContext from "../context/ErrorContext";
 import { useNavigate } from "react-router";
+import AuthContext from "../context/AuthContext";
 
 export default function useGetOrders() {
     const [orders, setOrders] = useState([]);
     const [loadingOrders, setLoadingOrders] = useState(false);
     const { errorSetter } = useContext(ErrorContext);
+    const { userSetter } = useContext(AuthContext);
     const navigate = useNavigate()
 
     useEffect(()=> {
@@ -30,8 +32,12 @@ export default function useGetOrders() {
                 setLoadingOrders(false)
             })
             .catch(err => {
-                errorSetter(err)
                 setLoadingOrders(false)
+                if(err.code === 209){
+                    localStorage.clear()
+                    userSetter({});
+                    navigate('/')
+                }    
                 
             })
             

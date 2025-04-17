@@ -12,7 +12,7 @@ export default function ListItem({
     const {user} = useContext(AuthContext);
     const isOwner = useIsOwner(order.creator, user.username);
     const { isLate, warning } = useIsLate(order);
-    const formattedDate = moment(order.expected).format("DD/MM/YYYY")
+    const formattedDate = moment(order.expected, "DD/MM/YYYY г.").format("DD/MM/YYYY");
 
 return (
         <tr className={`${order.isOptimistic ? "gray" : ""} ${warning ? "warning" : ""} ${isLate ? "late" : ""}`}>
