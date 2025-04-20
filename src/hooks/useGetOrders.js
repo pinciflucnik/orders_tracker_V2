@@ -50,7 +50,7 @@ export default function useGetOrders() {
             setOrders(oldState => {
                 const newState = oldState.map(o => {
                     if(o.objectId === id){
-                        o.isOptimistic = true;
+                        return {...o, isOptimistic: true}
                     }
                     return o;
                 })

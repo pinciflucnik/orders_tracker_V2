@@ -4,6 +4,7 @@ import useIsOwner from "../../../hooks/useIsOwner";
 import { Link } from "react-router";
 import useIsLate from "../../../hooks/useIsLate";
 import moment from "moment";
+import SmallLoader from "../../loaders/SmallLoader";
 
 export default function ListItem({
     order,
@@ -12,10 +13,10 @@ export default function ListItem({
     const {user} = useContext(AuthContext);
     const isOwner = useIsOwner(order.creator, user.username);
     const { isLate, warning } = useIsLate(order);
-    const formattedDate = moment(order.expected, ["DD.MM.YYYY", "MM.DD.YYYY", "DD.MM.YYYY г.", "MM/DD/YYYY", "DD/MM/YYYY", "DD/MM/YYYY г.", "M/DD/YYYY"], true).format("DD.MM.YYYY");
-
+    const formattedDate = moment(order.expected, ["DD.MM.YYYY", "MM.DD.YYYY", "DD.MM.YYYY г.", "MM/DD/YYYY", "DD/MM/YYYY", "DD/MM/YYYY г.", "M/DD/YYYY", "M/D/YYYY"], true).format("DD.MM.YYYY");
+    
 return (
-        <tr className={`${order.isOptimistic ? "gray" : ""} ${warning ? "warning" : ""} ${isLate ? "late" : ""}`}>
+        <tr className={`${warning ? "warning" : ""} ${isLate ? "late" : ""} ${order.isOptimistic ? "gray" : ""}`}>
             <td>{order.clientNumber}</td>
             <td>{order.clientName}</td>
             <td>{order.articleNumber}</td>
@@ -25,12 +26,18 @@ return (
             <td>{order.creator}</td>
             {isOwner 
                 ?<td className="functions">
-                    <button onClick={()=> deleteOrder(order.objectId)} disabled={order.isOptimistic ? true : false}>
-                        <i className="fa-solid fa-check"></i>
-                    </button>
-                    <Link to={`/${order.objectId}/edit`} disabled={order.isOptimistic ? true : false}>
-                        <i className="fa-solid fa-pencil"></i>
-                    </Link>
+                    {order.isOptimistic 
+                        ? <SmallLoader isOptimistic={order.isOptimistic} />
+                        : 
+                        <>
+                            <button onClick={()=> deleteOrder(order.objectId)}>
+                                <i className="fa-solid fa-check"></i>
+                            </button>
+                            <Link to={`/${order.objectId}/edit`} >
+                                <i className="fa-solid fa-pencil"></i>
+                            </Link>
+                        </>
+                    }   
                  </td>
                 : <td></td>
             }

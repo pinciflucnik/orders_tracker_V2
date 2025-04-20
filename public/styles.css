@@ -73,9 +73,6 @@ td a:hover {
     box-shadow: 0 0 0.8em #2e220e;
 }
 
-.gray {
-    color: gray;
-}
 
 .input-form form .loading {
     background-color: gray;
@@ -89,6 +86,9 @@ td a:hover {
 .late {
     background-color: #D34E24;
     color: white;
+}
+.gray {
+    color: gray;
 }
 
 #root {
@@ -276,6 +276,9 @@ i {
         radial-gradient(circle 5px, currentColor 95%, #0000),
         linear-gradient(currentColor 50%, #0000 0) 50%/4px 60% no-repeat;
     animation: l1 2s infinite linear;
+}
+.extra-small {
+    width: 1.6em;
 }
 
 .loader-small:before {
