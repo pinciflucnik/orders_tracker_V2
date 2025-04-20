@@ -14,12 +14,12 @@ return (
             <thead>
                 <tr>
                     <th>Client &#8470;</th>
-                    <th>Client name</th>
+                    <th className="clientName">Client name</th>
                     <th>Item</th>
                     <th>Quantity</th>
                     <th>Order &#8470;</th>
                     <th>Expected on</th>
-                    <th>Created by</th>
+                    <th className="creator">Created by</th>
                 </tr>
             </thead>
             <tbody>

@@ -18,12 +18,12 @@ export default function ListItem({
 return (
         <tr className={`${warning ? "warning" : ""} ${isLate ? "late" : ""} ${order.isOptimistic ? "gray" : ""}`}>
             <td>{order.clientNumber}</td>
-            <td>{order.clientName}</td>
+            <td className="clientName">{order.clientName}</td>
             <td>{order.articleNumber}</td>
             <td>{order.quantity}</td>
             <td>{order.orderNumber}</td>
             <td>{formattedDate}</td>
-            <td>{order.creator}</td>
+            <td className="creator">{order.creator}</td>
             {isOwner 
                 ?<td className="functions">
                     {order.isOptimistic 
