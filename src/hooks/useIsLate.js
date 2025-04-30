@@ -14,7 +14,7 @@ export default function useIsLate(order){
         const today = moment(now);
         console.log(order.expected);
         const formatHelper = order.expected.match(/[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}/)[0]
-        const expected = moment(formatHelper, ["DD.MM.YYYY", "MM.DD.YYYY", "DD.MM.YYYY г.", "MM/DD/YYYY", "DD/MM/YYYY", "DD/MM/YYYY г.", "M/DD/YYYY", "M/D/YYYY"], true);
+        const expected = moment(formatHelper, ["DD.MM.YYYY", "MM.DD.YYYY", "DD.MM.YYYY г.", "D.MM.YYYY г.", "MM/DD/YYYY", "DD/MM/YYYY", "DD/MM/YYYY г.", "M/DD/YYYY", "M/D/YYYY"], true);
         
         
         const timeLeft = expected.diff(today, 'days');
