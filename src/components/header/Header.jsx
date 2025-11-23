@@ -19,7 +19,7 @@ return (
             
             }
         </ul>
-        {isAuthenticated && <h3>Hello, {user.username}</h3>}
+        {isAuthenticated && <h3>{user.username}</h3>}
     </div>
 )
 }
